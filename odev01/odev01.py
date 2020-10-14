@@ -9,7 +9,7 @@ while i < int(sys.argv[1]):
     if len(my_str) > 5:
         print('Gerekenden fazla veri girdiniz')
         continue
-    if len(my_str) > 4:
+    elif len(my_str) > 4:
         try:
             user_id = int(my_str[0])
         except:
@@ -30,7 +30,7 @@ while i < int(sys.argv[1]):
         except:
             print("Yasiniz sayi olmalidir.")
             continue
-    else:
+    elif len(my_str) == 4:
         try:
             user_id = int(my_str[0])
         except:
@@ -51,7 +51,10 @@ while i < int(sys.argv[1]):
         except:
             print("Yasiniz sayi olmalidir.")
             continue
-
+    elif len(my_str) < 4:
+        print("Eksik veri girdiniz")
+        continue
+    
     if user_id in user_dict:
         print("Kullanici numarasi veritabaninda bulunmaktadır. Farklı numara giriniz.")
         continue

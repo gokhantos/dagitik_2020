@@ -107,6 +107,7 @@ class RSSI():
             frequences = []
             for freq_val in self.data[data]['frequences'][data]:
                 frequences.append(freq_val)
+            plt.title(data)
             plt.plot(frequences)
             plt.show()
 
@@ -117,6 +118,7 @@ class RSSI():
             for freq_val in self.data[data]['freq_dist'][data]:
                 frequences.append(str(freq_val))
                 freq_count.append(self.data[data]['freq_dist'][data][freq_val])
+            plt.title(data)
             plt.bar(frequences, freq_count)
             plt.show()
 

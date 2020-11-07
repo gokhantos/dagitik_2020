@@ -24,9 +24,7 @@ def process_data(words_queue,crypted_queue,block_length, shift_number):
         if not words_queue.empty():
             data = words_queue.get()
             data = encrypt(data, shift_number)
-            crypted_queue_lock.acquire()
             crypted_queue.put(data)
-            crypted_queue_lock.release()
             queue_lock.release()
         else:
             queue_lock.release()
@@ -61,7 +59,6 @@ thread_number = int(sys.argv[2])
 block_length = int(sys.argv[3])
 words_list = read_data(block_length)
 queue_lock = threading.Lock()
-crypted_queue_lock = threading.Lock()
 threads = []
 words_queue = queue.Queue()
 crypted_words_queue = queue.Queue()

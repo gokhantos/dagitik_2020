@@ -3,7 +3,7 @@ from multiprocessing import Lock, Process, Queue
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-def worker(words_queue,crypted_queue,stop_signal, block_length, shift_number, queue_lock, crypted_queue_lock):
+def worker(words_queue,crypted_queue,stop_signal, block_length, shift_number, queue_lock):
     while True:
         queue_lock.acquire()
         if stop_signal.empty() == False:
@@ -12,9 +12,7 @@ def worker(words_queue,crypted_queue,stop_signal, block_length, shift_number, qu
         if not words_queue.empty():
             data = words_queue.get()
             data = encrypt(data, shift_number)
-            crypted_queue_lock.acquire()
             crypted_queue.put(data)
-            crypted_queue_lock.release()
             queue_lock.release()
         else:
             queue_lock.release()
@@ -51,7 +49,6 @@ def main():
     block_length = int(sys.argv[3])
     words_list = read_data(block_length)
     queue_lock = Lock()
-    crypted_queue_lock = Lock()
     processes = []
     words_queue = Queue()
     crypted_words_queue = Queue()
@@ -62,7 +59,7 @@ def main():
 
     #Forking processes
     for i in range(process_number):
-        p = Process(target=worker, args=(words_queue, crypted_words_queue,stop_signal, block_length, shift_number, queue_lock, crypted_queue_lock))
+        p = Process(target=worker, args=(words_queue, crypted_words_queue,stop_signal, block_length, shift_number, queue_lock))
         p.start()
         processes.append(p)
 
@@ -91,7 +88,7 @@ def main():
     while not crypted_words_queue.empty():
         crypted_text.append(crypted_words_queue.get())
 
-    crypted_text = ''.join([str(elem) for elem in crypted_text]) 
+    crypted_text = ''.join([str(elem) for elem in crypted_text])
     save_text(crypted_text, shift_number, process_number, block_length)
 
 if __name__ == "__main__":

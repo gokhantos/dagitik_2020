@@ -52,11 +52,11 @@ class connThread(threading.Thread):
             except:
                 conn.send(b'PRR\n')
             #print(number, n, command)
-            if number > n and command == 'TRY':
+            if number > n and my_str == 'TRY':
                 conn.send(b'GTH\n')
-            elif number < n and command== 'TRY':
+            elif number < n and my_str== 'TRY':
                 conn.send(b'LTH\n')
-            elif number == n and command == 'TRY':
+            elif number == n and my_str == 'TRY':
                 conn.send(b'WIN\n')
                 break
 s = socket.socket()

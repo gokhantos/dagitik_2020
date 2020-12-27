@@ -51,16 +51,16 @@ class my_thread(threading.Thread):
                     self.thread_queue.put(command)
                     break
                 elif command == "OKG":
-                    self.thread_queue.put("OKG")
                     for queues in self.threads.values():
                         queues.put(self.username+":"+self.message)
+                    self.thread_queue.put("OKG")
                 elif command == "OKP":
-                    self.thread_queue.put("OKP")
                     self.users[self.to_user].put(self.username + ":" + self.message)
+                    self.thread_queue.put("OKP")
                 elif command == "OKW":
-                    self.thread_queue.put("OKW")
                     for queues in self.threads.values():
                         queues.put(self.username+ ":" +self.message)
+                    self.thread_queue.put("OKW")
                 else:
                     self.thread_queue.put(command)
                 
@@ -179,9 +179,9 @@ class my_thread(threading.Thread):
             return self._stop.isSet()
         def run(self):
             while True:
+                time.sleep(60)
                 if self.stopped():
                     break
-                time.sleep(60)
                 self.thread_queue.put("TIN")
                 timestamp = datetime.datetime.now()
                 logData = [str(timestamp), "server", self.to_user, "TIN"]

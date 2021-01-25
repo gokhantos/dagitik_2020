@@ -1,0 +1,9 @@
+REG kde:2020
+NIC kde:2020
+LSR
+LOG ubuntu
+LSO ubuntu
+OPN plasma
+LOG plasma
+LSR
+DEL plasma

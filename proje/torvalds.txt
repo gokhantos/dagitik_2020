@@ -1,0 +1,12 @@
+LSR
+NIC torvalds:1972
+REG torvalds:1974
+LSR
+GNL gentoo:selam
+LOG gentoo
+GNL gentoo:tekrar selam
+PRV tux:beni niye banladın?
+LOG ubuntu
+LSO ubuntu
+GNL ubuntu:hey
+KCK ubuntu:tux

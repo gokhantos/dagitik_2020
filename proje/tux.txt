@@ -1,0 +1,11 @@
+REG tux:herring
+REG tux:1994
+REG torvalds:1972
+NIC tux:1984
+NIC tux:1994
+OPN gentoo
+LOG gentoo
+KCK gentoo:torvalds
+BAN gentoo:torvalds
+OPN ubuntu
+LOG ubuntu
